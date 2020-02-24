@@ -1,0 +1,31 @@
+{
+  "name": "take-the-fruits",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marvinsiq/game-multiplayer.git"
+  },
+  "keywords": [
+    "game",
+    "js",
+    "node",
+    "javascrpt",
+    "socket"
+  ],
+  "author": "Marcus Siqueira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marvinsiq/game-multiplayer/issues"
+  },
+  "homepage": "https://github.com/marvinsiq/game-multiplayer#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
