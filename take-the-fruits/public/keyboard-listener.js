@@ -1,8 +1,13 @@
 export default function createKeyboardListener(document) {
 
     const state = {
-        observers: []
+        observers: [],
+        playerId: null
     }
+
+    function registerPlayerId(playerId) {
+        state.playerId = playerId
+    }    
 
     function subscribe(observerFunction) {
         //console.log(`Subscribing ${observerFunction}`);
@@ -10,8 +15,7 @@ export default function createKeyboardListener(document) {
     }
 
     function notityAll(command) {
-        console.log(`Notifying ${state.observers.length} observers.`);
-
+        //console.log(`Notifying ${state.observers.length} observers.`);
         state.observers.forEach(observerFunction => {
             observerFunction(command);
         });
@@ -21,7 +25,8 @@ export default function createKeyboardListener(document) {
         const keyPressed = event.key;
 
         const command = {
-            playerId: 'player1',
+            type: "move-layer",
+            playerId: state.playerId,
             keyPressed
         }
 
@@ -29,6 +34,7 @@ export default function createKeyboardListener(document) {
     });
 
     return {
-        subscribe
+        subscribe,
+        registerPlayerId
     }
 }
