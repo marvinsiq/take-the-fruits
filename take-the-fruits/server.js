@@ -1,7 +1,7 @@
 import express from 'express';
 import http from 'http';
 import socketio from 'socket.io';
-import createGame from './public/game.js';
+import createGame from './server-game.js';
 
 const app = express();
 const server = http.createServer(app);
@@ -12,10 +12,10 @@ app.use(express.static('public'));
 const game = createGame();
 game.start()
 
-game.subscribe(command => {
-    console.log(`> Emitting ${command.type}`);
-    sockets.emit(command.type, command);
-})
+game.subscribe(state => {
+    console.log(`> Update`);
+    sockets.emit('update', state);
+});
 
 sockets.on('connection', socket => {
     const playerId = socket.id;
@@ -23,23 +23,22 @@ sockets.on('connection', socket => {
 
     game.addPlayer({ playerId });
 
-    socket.emit('setup', game.state)
-
     socket.on('disconnect', () => {
         game.removePlayer({ playerId });
         console.log(`> Player disconnected: ${playerId}`);
     })
 
-    socket.on('move-player', command => {
+    socket.on('move-player', keyPressed => {
 
         // Evita de mover outro jogador
-        command.playerId = playerId;
-        command.type = 'move-player';
+        const command = {
+            playerId,
+            keyPressed
+        }
 
         game.movePlayer(command);
     });
 });
-
 
 server.listen(3000, () => {
     console.log(`> Server listening on port: 3000`);
