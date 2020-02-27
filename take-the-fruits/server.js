@@ -13,7 +13,7 @@ const game = createGame();
 game.start()
 
 game.subscribe(state => {
-    console.log(`> Update`);
+    //console.log(`> Update State`);
     sockets.emit('update', state);
 });
 
@@ -22,6 +22,7 @@ sockets.on('connection', socket => {
     console.log(`> Player connected: ${playerId}`);
 
     game.addPlayer({ playerId });
+    sockets.emit('startUp', game.state);
 
     socket.on('disconnect', () => {
         game.removePlayer({ playerId });
@@ -30,7 +31,6 @@ sockets.on('connection', socket => {
 
     socket.on('move-player', keyPressed => {
 
-        // Evita de mover outro jogador
         const command = {
             playerId,
             keyPressed

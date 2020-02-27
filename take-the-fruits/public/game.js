@@ -3,10 +3,7 @@ export default function createGame() {
     const state = {
         players: {},
         fruits: {},
-        screen: {
-            width: 10,
-            height: 10
-        }
+        screen: {}
     };
     
     function movePlayer(playerId, keyPressed) {

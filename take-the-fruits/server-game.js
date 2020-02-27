@@ -6,14 +6,20 @@ export default function createGame() {
         players: {},
         fruits: {},
         screen: {
-            width: 10,
-            height: 10
+            width: 25,
+            height: 25
         }
     };
 
     function start() {
-        const frequency = 8000;
-        setInterval(addFruit, frequency);
+        const frequency = 3000;
+        setInterval(needAddFruit, frequency);
+    }
+
+    function needAddFruit() {
+        if (Object.keys(state.fruits).length < 3) {
+            addFruit();
+        }
     }
 
     function subscribe(observerFunction) {
@@ -32,6 +38,7 @@ export default function createGame() {
 
         state.players[id] = {
             id,
+            score: 0,
             x,
             y
         }
@@ -74,6 +81,7 @@ export default function createGame() {
             //console.log(`Checking ${player.id} and ${fruitId}`)
 
             if (player.x === fruit.x && player.y === fruit.y) {
+                player.score++;
                 console.log(`COLLISION between ${player.id} and ${fruitId}`)
                 removeFruit({ fruitId: fruitId })
             }
@@ -82,7 +90,7 @@ export default function createGame() {
 
     function movePlayer(command) {
         
-        console.log(`Moving ${command.playerId} with ${command.keyPressed}`);
+        //console.log(`>> Moving ${command.playerId} with ${command.keyPressed}`);
 
         const acceptedMoves = {
             ArrowUp(player) {
