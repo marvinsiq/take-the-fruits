@@ -1,6 +1,6 @@
 # game-multiplayer
 
-Jogo multiplayer bastante simples para testarmos o Socket.io
+Jogo multiplayer para testar o Socket.io
 
 ## Pré-requisitos
 
