@@ -1,6 +1,14 @@
-# game-multiplayer
+# Take The Fruits
 
 Jogo multiplayer para testar o Socket.io
+
+![Take The Fruits](Take-The-Fruits.png)
+
+## Tecnologias utilizadas
+* javascript
+* node
+* express
+* socket.io
 
 ## Pré-requisitos
 
